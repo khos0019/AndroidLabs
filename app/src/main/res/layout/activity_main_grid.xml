@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/gridLayout"
     android:rowCount="4"
-    android:columnCount="2"
-    >
+    android:columnCount="2">
 
     <TextView
         android:layout_width="411sp"
