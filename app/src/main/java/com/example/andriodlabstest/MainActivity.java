@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         checkBox.setOnCheckedChangeListener(this);
         aSwitch.setOnCheckedChangeListener(this);
-
     }
 
     @Override
