@@ -11,4 +11,16 @@
     <string name="toast_message">Information</string>
     <string name="switch_on">The switch is now on.</string>
     <string name="switch_off">The switch is now off.</string>
+
+    <string name="emailText">Email Address:</string>
+    <string name="enterEmail">Email</string>
+    <string name="passwordText">Password</string>
+    <string name="loginText">Continue</string>
+    <string name="profile">Profile</string>
+    <string name="nameText">Name:</string>
+    <string name="typeName">Your name</string>
+    <string name="email">Email:</string>
+    <string name="emailHint">Your email</string>
+    <string name="pictureText">Put Picture here:</string>
+    <string name="pictureInfo">Click the button above.</string>
 </resources>

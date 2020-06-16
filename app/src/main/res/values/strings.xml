@@ -1,13 +1,25 @@
 <resources>
-<string name="app_name">AndroidLabs</string>
-<string name="hello_message">Hello</string>
-<string name="buttonText">I\'m a button</string>
-<string name="Text">Look at my GUI</string>
-<string name="ButtonText">Click here</string>
-<string name="CheckBoxText">Check this out!</string>
-<string name="SwitchText">Switch on/off</string>
-<string name="hiddenText">Type Here</string>
-<string name="toast_message">Here is more information</string>
-<string name="switch_on">The switch is now on.</string>
-<string name="switch_off">The switch is now off.</string>
+    <string name="app_name">AndroidLabs</string>
+    <string name="hello_message">Hello</string>
+    <string name="buttonText">I\'m a button</string>
+    <string name="Text">Look at my GUI</string>
+    <string name="ButtonText">Click here</string>
+    <string name="CheckBoxText">Check this out!</string>
+    <string name="SwitchText">Switch on/off</string>
+    <string name="hiddenText">Type Here</string>
+    <string name="toast_message">Here is more information</string>
+    <string name="switch_on">The switch is now on.</string>
+    <string name="switch_off">The switch is now off.</string>
+
+    <string name="emailText">Enter your email address:</string>
+    <string name="enterEmail">Type email here</string>
+    <string name="passwordText">Type your password:</string>
+    <string name="loginText">Login</string>
+    <string name="profile">Your profile</string>
+    <string name="nameText">Your name:</string>
+    <string name="typeName">Enter your name</string>
+    <string name="email">Your email:</string>
+    <string name="emailHint">Enter your email</string>
+    <string name="pictureText">Your picture:</string>
+    <string name="pictureInfo">Click the button above to take a picture.</string>
 </resources>
