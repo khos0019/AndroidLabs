@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString(TEXT, editText.getText().toString());
         editor.apply();
 
-        }
+    }
 
     public void loadEmail() {
         SharedPreferences sp = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);

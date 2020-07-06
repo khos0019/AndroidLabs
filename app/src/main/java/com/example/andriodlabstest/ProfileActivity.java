@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -15,6 +16,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ImageButton mImageButton;
     private EditText emailText;
+    private Button btn;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -42,6 +44,16 @@ public class ProfileActivity extends AppCompatActivity {
         emailText = findViewById(R.id.email);
 
         emailText.setText(email);
+
+        btn = findViewById(R.id.chatButton);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToChat =  new Intent(ProfileActivity.this, ChatRoomActivity.class);
+                startActivity(goToChat);
+            }
+        });
 
     }
 
@@ -91,7 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
             mImageButton.setImageBitmap(imageBitmap);
         }
 
-        Log.e(ACTIVITY_NAME, "In function: onActivityResult");
+        Log.e(ACTIVITY_NAME, "In function: onActivityResult()");
 
     }
 

@@ -22,4 +22,8 @@
     <string name="emailHint">Enter your email</string>
     <string name="pictureText">Your picture:</string>
     <string name="pictureInfo">Click the button above to take a picture.</string>
+    <string name="enterChat">Enter Chat</string>
+    <string name="sendText">SEND</string>
+    <string name="typeHere">Type here</string>
+    <string name="receiveText">RECEIVE</string>
 </resources>
