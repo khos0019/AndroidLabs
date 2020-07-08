@@ -4,8 +4,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
@@ -23,6 +28,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     private MyListAdapter myAdapter;
     private Button sendBtn, receiveBtn;
     private EditText editText;
+    SQLiteDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +42,20 @@ public class ChatRoomActivity extends AppCompatActivity {
         receiveBtn = findViewById(R.id.receiveBtn);
         editText = findViewById(R.id.chatText);
 
+        loadDataFromDatabase();
 
         sendBtn.setOnClickListener((click) -> {
             String message = editText.getText().toString();
             if (!message.equals("")) {
-                Message addMessage = new Message(message, true);
+
+                ContentValues newRowValues = new ContentValues();
+
+                newRowValues.put(MyOpener.COL_ISSEND, 1); // 1 for true 0 for false
+                newRowValues.put(MyOpener.COL_MESSAGE, message);
+
+                long newId = database.insert(MyOpener.TABLE_NAME, null, newRowValues);
+
+                Message addMessage = new Message(message, true, newId);
                 elements.add(addMessage);
                 myAdapter.notifyDataSetChanged();
                 editText.setText("");
@@ -51,7 +66,15 @@ public class ChatRoomActivity extends AppCompatActivity {
         receiveBtn.setOnClickListener((click) -> {
             String message = editText.getText().toString();
             if (!message.equals("")) {
-                Message addMessage = new Message(message, false);
+
+                ContentValues newRowValues = new ContentValues();
+
+                newRowValues.put(MyOpener.COL_ISSEND, 0);
+                newRowValues.put(MyOpener.COL_MESSAGE, message);
+
+                long newId = database.insert(MyOpener.TABLE_NAME, null, newRowValues);
+
+                Message addMessage = new Message(message, false, newId);
                 elements.add(addMessage);
                 myAdapter.notifyDataSetChanged();
                 editText.setText("");
@@ -67,6 +90,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                             "\nThe database id: " + id)
 
                     .setPositiveButton("Yes", (click, arg) -> {
+                        deleteMessage(elements.get(pos));
                         elements.remove(pos);
                         myAdapter.notifyDataSetChanged();
                     })
@@ -88,7 +112,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         public Object getItem(int position) { return elements.get(position); }
 
-        public long getItemId(int position) { return (long) position; }
+        public long getItemId(int position) { return elements.get(position).getId(); }
 
         public View getView(int position, View old, ViewGroup parent)
         {
@@ -97,7 +121,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             LayoutInflater inflater = getLayoutInflater();
 
             if(newView == null) {
-                if (elements.get(position).isSend())
+                if (elements.get(position).getIsSend())
                     newView = inflater.inflate(R.layout.send_message, parent, false);
                 else
                     newView = inflater.inflate(R.layout.receive_message, parent, false);
@@ -110,17 +134,70 @@ public class ChatRoomActivity extends AppCompatActivity {
         }
     }
 
+    private void loadDataFromDatabase() {
+
+        MyOpener dbOpener = new MyOpener(this);
+        database = dbOpener.getWritableDatabase();
+
+        String [] columns = {MyOpener.COL_ID, MyOpener.COL_MESSAGE, MyOpener.COL_ISSEND};
+
+        Cursor results = database.query(false,MyOpener.TABLE_NAME,columns,null,null,null,null,null,null);
+
+        int messageColumnIndex = results.getColumnIndex(MyOpener.COL_MESSAGE);
+        int isSendColIndex = results.getColumnIndex(MyOpener.COL_ISSEND);
+        int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
+
+        while(results.moveToNext()) {
+            String message = results.getString(messageColumnIndex);
+            boolean isSend = results.getInt(isSendColIndex) ==1 ? true : false;
+            long id = results.getLong(idColIndex);
+
+            elements.add(new Message(message, isSend, id));
+        }
+
+        printCursor(results, database.getVersion());
+    }
+
+    protected void deleteMessage(Message message) {
+        database.delete(MyOpener.TABLE_NAME, MyOpener.COL_ID + "= ?", new String[] {Long.toString(message.getId())});
+    }
+
+    protected void printCursor(Cursor c, int version) {
+        Log.d("Version ", Integer.toString(version));
+        Log.d("Number of Columns ", Integer.toString(c.getColumnCount()));
+        Log.d("Column Names: ", Arrays.toString(c.getColumnNames()));
+        Log.d("Number of Rows: ", Integer.toString(c.getCount()));
+
+        c.moveToFirst();
+        for (int i=0; i<c.getCount(); i++) {
+            Log.d("Results: ", c.getString(0) + " | " +
+                    c.getString(1) + " | " +
+                    c.getString(2));
+            c.moveToNext();
+        }
+    }
+
     private class Message {
         private String message;
         private boolean send;
+        private long Id;
 
-        Message(String message, boolean send) {
+        Message(String message, boolean send, long Id) {
             this.message = message;
             this.send = send;
+            this.Id = Id;
         }
 
-        public String getMessage () { return message; }
+        public String getMessage() {
+            return message;
+        }
 
-        public boolean isSend () { return send; }
+        public boolean getIsSend() {
+            return send;
+        }
+
+        public long getId() {
+            return Id;
+        }
     }
 }
