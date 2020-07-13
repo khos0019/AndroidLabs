@@ -172,16 +172,16 @@ public class WeatherForecast extends AppCompatActivity {
         }
 
 
-        public boolean fileExistence(String fileName) {
-            File file = getBaseContext().getFileStreamPath(fileName);
+        public boolean fileExistence(String fname) {
+            File file = getBaseContext().getFileStreamPath(fname);
             return file.exists();
         }
 
         @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
+        protected void onProgressUpdate(Integer... value) {
+            super.onProgressUpdate(value);
             progressBar.setVisibility(View.VISIBLE);
-            progressBar.setProgress(values[0]);
+            progressBar.setProgress(value[0]);
         }
 
         @Override
