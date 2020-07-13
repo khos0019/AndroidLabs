@@ -16,7 +16,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ImageButton mImageButton;
     private EditText emailText;
-    private Button btn;
+    private Button btn, weatherBtn;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -51,6 +51,16 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToChat =  new Intent(ProfileActivity.this, ChatRoomActivity.class);
+                startActivity(goToChat);
+            }
+        });
+
+        weatherBtn = findViewById(R.id.weatherButton);
+
+        weatherBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToChat =  new Intent(ProfileActivity.this, WeatherForecast.class);
                 startActivity(goToChat);
             }
         });

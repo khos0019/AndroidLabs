@@ -27,4 +27,5 @@
     <string name="sendText">Sent</string>
     <string name="typeHere">Text here</string>
     <string name="receiveText">Received</string>
+    <string name="enterWeather">Weather</string>
 </resources>
