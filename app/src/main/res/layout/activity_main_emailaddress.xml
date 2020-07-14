@@ -2,13 +2,19 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="27dp"
+    android:layout_marginBottom="27dp"
+    android:layout_marginLeft="48dp"
+    android:layout_marginRight="48dp" >
 
     <TextView
+        android:id="@+id/item1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/emailText"
         android:textSize="20sp"
+        android:nextFocusDown="@id/emailText"
         />
 
     <EditText
@@ -17,19 +23,27 @@
         android:layout_height="wrap_content"
         android:hint="@string/enterEmail"
         android:inputType="textEmailAddress"
+        android:nextFocusUp="@id/item1"
+        android:nextFocusDown="@id/item3"
         />
 
     <TextView
+        android:id="@+id/item3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/passwordText"
         android:textSize="20sp"
+        android:nextFocusUp="@id/emailText"
+        android:nextFocusDown="@id/item4"
         />
 
     <EditText
+        android:id="@+id/item4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
+        android:nextFocusUp="@id/item3"
+        android:nextFocusDown="@id/loginButton"
         />
 
     <Button
@@ -37,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/loginText"
+        android:nextFocusUp="@id/item4"
         />
 
 
