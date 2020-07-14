@@ -8,36 +8,36 @@
     android:layout_gravity="center">
 
     <ImageView
-        android:id="@+id/current_weather"
+        android:id="@+id/currentWeather"
         android:layout_width="100dp"
         android:layout_height="50dp"/>
 
     <TextView
-        android:id="@+id/current_temperature"
+        android:id="@+id/currentTemperature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
     <TextView
-        android:id="@+id/min_temperature"
+        android:id="@+id/minTemperature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
     <TextView
-        android:id="@+id/max_temperature"
+        android:id="@+id/maxTemperature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
     <TextView
-        android:id="@+id/uv_rating"
+        android:id="@+id/uvRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="invisible"
