@@ -65,7 +65,7 @@ public class WeatherForecast extends AppCompatActivity {
         private String UV;
         private String min;
         private String max;
-        private String current_temp;
+        private String currentTemp;
         private Bitmap image;
         private String iconName;
 
@@ -93,7 +93,7 @@ public class WeatherForecast extends AppCompatActivity {
 
                         switch (tagName) {
                             case "temperature":
-                                current_temp = xpp.getAttributeValue(null, "value");
+                                currentTemp = xpp.getAttributeValue(null, "value");
                                 publishProgress(25);
                                 min = xpp.getAttributeValue(null, "min");
                                 publishProgress(50);
@@ -190,12 +190,12 @@ public class WeatherForecast extends AppCompatActivity {
             char celsiusSymbol = 0x2103;
 
             weatherImage.setImageBitmap(image);
-            currentTemperature.setText(String.format("Current Temp: %s%c", current_temp, celsiusSymbol));
+            currentTemperature.setText(String.format("Current Temp: %s%c", currentTemp, celsiusSymbol));
             maxTemperature.setText(String.format("Max: %s%c", max, celsiusSymbol));
             minTemperature.setText(String.format("Min: %s%c", min, celsiusSymbol));
             uvRating.setText(String.format("UV Index: %s", UV));
 
-            progressBar.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
         }
     }
 
