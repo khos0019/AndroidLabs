@@ -195,7 +195,7 @@ public class WeatherForecast extends AppCompatActivity {
             minTemperature.setText(String.format("Min: %s%c", min, celsiusSymbol));
             uvRating.setText(String.format("UV Index: %s", UV));
 
-            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 
