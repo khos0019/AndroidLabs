@@ -12,42 +12,34 @@
     android:layout_marginRight="48dp" >
 
     <TextView
-        android:id="@+id/item1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/profile"
         android:textSize="20sp"
-        android:nextFocusDown="@id/item2"
         />
 
     <TextView
-        android:id="@+id/item2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/nameText"
         android:textSize="19sp"
-        android:nextFocusUp="@id/item1"
-        android:nextFocusDown="@id/item3"
         />
 
     <EditText
-        android:id="@+id/item3"
+        android:id="@+id/item1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/typeName"
         android:inputType="textEmailAddress"
-        android:nextFocusUp="@id/item2"
-        android:nextFocusDown="@id/item4"
+        android:nextFocusUp="@id/weatherButton"
+        android:nextFocusDown="@id/email"
         />
 
     <TextView
-        android:id="@+id/item4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/email"
         android:textSize="19sp"
-        android:nextFocusUp="@id/item3"
-        android:nextFocusDown="@id/email"
         />
 
     <EditText
@@ -56,8 +48,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/emailHint"
         android:inputType="textEmailAddress"
-        android:nextFocusUp="@id/item4"
-        android:nextFocusDown="@id/item6"
+        android:nextFocusUp="@id/item1"
+        android:nextFocusDown="@id/imageBtn"
         />
 
     <TextView
@@ -75,18 +67,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@android:drawable/picture_frame"
-        android:nextFocusUp="@id/item6"
-        android:nextFocusDown="@id/item8"
+        android:nextFocusUp="@id/email"
+        android:nextFocusDown="@id/chatButton"
         />
 
     <TextView
-        android:id="@+id/item8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/pictureInfo"
         android:textSize="19sp"
-        android:nextFocusUp="@id/imageBtn"
-        android:nextFocusDown="@id/chatButton"
         />
 
     <Button
@@ -94,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/enterChat"
-        android:nextFocusUp="@id/item8"
+        android:nextFocusUp="@id/imageBtn"
         android:nextFocusDown="@id/weatherButton"
         />
 
@@ -104,6 +93,7 @@
         android:layout_height="wrap_content"
         android:text="@string/enterWeather"
         android:nextFocusUp="@id/chatButton"
+        android:nextFocusDown="@id/item1"
         />
 
 </LinearLayout>
