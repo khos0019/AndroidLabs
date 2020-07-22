@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +31,11 @@ public class ChatRoomActivity extends AppCompatActivity {
     private Button sendBtn, receiveBtn;
     private EditText editText;
     SQLiteDatabase database;
+    public static final String ITEM_SELECTED = "ITEM_SELECTED";
+    public static final String ITEM_ISSEND = "ITEM_ISSEND";
+    public static final String ITEM_ID = "ITEM_ID";
+    private DetailsFragment dFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +99,9 @@ public class ChatRoomActivity extends AppCompatActivity {
                     .setPositiveButton("Yes", (click, arg) -> {
                         deleteMessage(elements.get(pos));
                         elements.remove(pos);
+                        getSupportFragmentManager().beginTransaction().remove(dFragment).commit();
+
+
                         myAdapter.notifyDataSetChanged();
                     })
 
@@ -99,6 +109,31 @@ public class ChatRoomActivity extends AppCompatActivity {
 
                     .create().show();
             return true;
+        });
+
+        //Checks if the FrameLayout is on a tablet or phone. Null being phone and !null being tablet.
+        boolean isTablet = findViewById(R.id.frameLayout) != null;
+
+        myList.setOnItemClickListener((list, item, position, id) -> {
+            //Create a bundle to pass data to the new fragment
+            Bundle dataToPass = new Bundle();
+            dataToPass.putString(ITEM_SELECTED, elements.get(position).getMessage() ); //getting message from elements
+            dataToPass.putBoolean(ITEM_ISSEND, elements.get(position).getIsSend());
+            dataToPass.putLong(ITEM_ID, id);
+
+            if(isTablet) {
+                dFragment = new DetailsFragment(); //add a DetailFragment
+                dFragment.setArguments( dataToPass ); //pass it a bundle for information
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, dFragment) //Add the fragment in FrameLayout
+                        .commit(); //actually load the fragment.
+            } else { // using Phone device
+                Intent nextActivity = new Intent(this, EmptyActivity.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivity(nextActivity); //make the transition
+            }
+
         });
 
         SwipeRefreshLayout refresher = findViewById(R.id.refresher);

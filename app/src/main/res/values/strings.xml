@@ -27,4 +27,9 @@
     <string name="typeHere">Type here</string>
     <string name="receiveText">RECEIVE</string>
     <string name="enterWeather">Weather Forecast</string>
+
+    <string name="messageHere">Message Here</string>
+    <string name="id">ID=</string>
+    <string name="sendMessage">is a Send Message</string>
+    <string name="hide">HIDE</string>
 </resources>
